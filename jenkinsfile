@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         SERVER_IP      = '172.31.29.165'
-        SSH_CREDENTIAL = 'ubuntu'
+        SSH_CREDENTIAL = 'node'
         REPO_URL       = 'https://github.com/surajjagtap221/node-app.git'
         BRANCH         = 'main'
         REMOTE_USER    = 'ubuntu'
@@ -22,7 +22,7 @@ pipeline {
             steps {
                 sshagent([SSH_CREDENTIAL]) {
                     sh """
-                        ssh -o StrictHostKeyChecking=no ${REMOTE_USER}@${SERVER_IP} 'mkdir -p ${REMOTE_PATH}'
+                        ssh -o StrictHostKeyChecking=no ${REMOTE_USER}@${SERVER_IP}
                         scp -o StrictHostKeyChecking=no -r * ${REMOTE_USER}@${SERVER_IP}:${REMOTE_PATH}/
                     """
                 }
